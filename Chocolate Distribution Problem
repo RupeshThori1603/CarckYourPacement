@@ -1,0 +1,11 @@
+vector<int> chocDistribution(int N, int M) {
+    vector<int> people(N, 0);
+
+    sort(people.begin(), people.end());
+
+    for (int i = 0; i < M; i++) {
+        people[i % N]++;
+    }
+
+    return people;
+}
