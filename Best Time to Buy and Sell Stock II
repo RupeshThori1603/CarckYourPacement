@@ -1,0 +1,23 @@
+class Solution {
+public:
+
+    int function(vector<int>& prices, int idx, int taken, vector<vector<int>>& dp){
+        if(idx == prices.size()) return 0;
+
+        if(dp[idx][taken] != -1) return dp[idx][taken];
+
+       int profit = 0;
+        if(taken){
+        profit = max(-prices[idx] + function(prices, idx+1, 0, dp), 0 + function(prices, idx+1, 1, dp));
+        }else{
+        profit = max(prices[idx] + function(prices, idx+1, 1, dp), 0 + function(prices, idx+1, 0, dp));
+        }
+        return dp[idx][taken] = profit;
+    }
+
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        vector<vector<int>> dp(n, vector<int>(2, -1));
+        return function(prices, 0, 1, dp);
+    }
+};
